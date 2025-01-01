@@ -1,0 +1,29 @@
+<div class="container mt-4">
+    <form [formGroup]="taskForm">
+        <h2>Crear una tarea</h2>
+        <div class="row col-lg-12 mx-auto">
+            <div class="col-5 form-group">
+                <label class="label">Título</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" formControlName="title" placeholder="titulo">
+                </div>
+                <span>Mínimo 5 caracteres y máximo 30</span>
+            </div>
+            <div class="col-5 form-group">
+                <label class="label">Descripción</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" formControlName="description" placeholder="descripción">
+                </div>
+                <span>Mínimo 5 caracteres y máximo 50</span>
+            </div>
+        </div>
+        <div class="row col-12 justify-content-center m-4">
+            <div class="col-5">
+                <button class="btn btn-secondary ">Cancelar</button>
+            </div>
+            <div class="col-5">
+                <button class="btn btn-primary">Crear</button>
+            </div>
+        </div>
+    </form>
+</div>
