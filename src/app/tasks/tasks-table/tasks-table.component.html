@@ -13,7 +13,7 @@
       <td>{{ task.title }}</td>
       <td>{{ task.completed ? 'Completado' : 'Pendiente' }}</td>
       <td>
-        <i class="fa fa-trash mx-3"></i>
+        <i class="fa fa-trash mx-3" (click)="showModalConfirm(task?.id || '')"></i>
         <i class="fa fa-edit" (click)="edit(task?.id || '')"></i>
       </td>
     </tr>

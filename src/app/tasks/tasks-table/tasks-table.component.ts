@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Task } from 'src/app/models/task.model';
 import { TaskService } from 'src/app/services/task.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-tasks-table',
@@ -38,7 +39,16 @@ export class TasksTableComponent implements OnInit {
   edit(id: string) {
     this.router.navigate([`tasks/edit` , id])
   }
-
+  delete(id: string) {
+    this.taskService.deleteTask(id || '').subscribe( {
+      next: (res: Task) => {
+        this.showModalInfo('Información')
+      },
+      error: err => {
+        
+      }
+    })
+  }
   updatePaginatedTasks() {
     const startIndex = (this.currentPage - 1) * this.pageSize;
     const endIndex = startIndex + this.pageSize;
@@ -80,5 +90,34 @@ export class TasksTableComponent implements OnInit {
 
   getTotalPages() {
     this.totalPages = Math.ceil(this.totalTasks / this.pageSize);
+  }
+
+  showModalConfirm(id:string) {
+    Swal.fire({
+      title: "Está seguro de eliminar este registro?",
+      showDenyButton: false,
+      showCancelButton: true,
+      showConfirmButton: true,
+      confirmButtonText: "Confirmar",
+      cancelButtonText: `Cancelar`
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.delete(id);
+      } else if (result.isDenied) {
+        
+      }
+    });
+  }
+
+  showModalInfo(title: string) {
+    Swal.fire({
+      title,
+      text: `Se eliminó el registro`,
+      icon: "success"
+    }).then( (res) => {
+      if (res.isConfirmed) {
+        this.router.navigate(['']);
+      }
+    })
   }
 }

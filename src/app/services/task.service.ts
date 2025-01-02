@@ -19,7 +19,9 @@ export class TaskService {
   addTasks(body: Task) {
     return this.httpClient.post(this.urlApi, body);
   }
-
+  deleteTask(id: string) {
+    return this.httpClient.delete(this.urlApi+ `/${id}`);
+  }
   updateTasks(body: Task, id: string) {
     return this.httpClient.patch(this.urlApi+ `/${id}`, body);
   }
