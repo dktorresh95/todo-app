@@ -1,10 +1,10 @@
-<div class="container">
-    <h1>Lista de tareas</h1>
+<div class="container my-5">
+    <h1 class="title">Lista de tareas</h1>
     <div class="row justify-content-end">
-        <div class="col-3">
-            <button class="btn btn-primary" (click)="create()">Crear tarea</button>
+        <div class="col-8 col-md-3 d-flex justify-content-end align-items-end"> 
+          <button class="btn btn-action m-3" (click)="create()">Crear tarea</button>
         </div>
-    </div>
+      </div>
     <section>
         <app-tasks-table></app-tasks-table>
     </section>

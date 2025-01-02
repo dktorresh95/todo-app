@@ -8,13 +8,13 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let task of paginatedTasks">
+    <tr *ngFor="let task of paginatedTasks; let i =index" [ngClass]="{'tr-color': i % 2 === 1}">
       <td>{{ task.id }}</td>
       <td>{{ task.title }}</td>
       <td>{{ task.completed ? 'Completado' : 'Pendiente' }}</td>
       <td>
-        <i class="fa fa-trash mx-3" (click)="showModalConfirm(task?.id || '')"></i>
-        <i class="fa fa-edit" (click)="edit(task?.id || '')"></i>
+        <i id="delete-icon" class="fa fa-trash mx-3" (click)="showModalConfirm(task?.id || '')"></i>
+        <i id="edit-icon" class="fa fa-edit" (click)="edit(task?.id || '')"></i>
       </td>
     </tr>
   </tbody>
@@ -23,19 +23,19 @@
 <nav aria-label="Page navigation example">
   <ul class="pagination">
     <li class="page-item" [ngClass]="{'li-disabled' :currentPage === 1}">
-      <a class="page-link" href="#" aria-label="Previous" (click)="previousPage()">
+      <a class="page-link paginate" href="#" aria-label="Previous" (click)="previousPage()">
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
 
     <li *ngFor="let page of pageRange" class="page-item" [class.active]="currentPage === page">
-      <a class="page-link" href="#" (click)="goToPage(page)">
+      <a class="page-link paginate" href="#" (click)="goToPage(page)">
         {{ page }}
       </a>
     </li>
 
     <li class="page-item" [ngClass]="{'li-disabled' :currentPage === totalPages}">
-      <a class="page-link" href="#" aria-label="Next" (click)="nextPage()">
+      <a class="page-link paginate" href="#" aria-label="Next" (click)="nextPage()">
         <span aria-hidden="true">&raquo;</span>
       </a>
     </li>

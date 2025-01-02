@@ -116,7 +116,9 @@ export class TasksTableComponent implements OnInit {
       icon: "success"
     }).then( (res) => {
       if (res.isConfirmed) {
-        this.router.navigate(['']);
+        this.currentPage = 1;
+        this.pageRange = [];
+        this.loadTasks();
       }
     })
   }

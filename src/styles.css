@@ -1,2 +1,64 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.min.css";
+
+:root {
+  --white-gray: #e3e1e1;
+  --second-gray: #eae7e7;
+  --border-color: #727171;
+  --text: #585656;
+  --primary-button: #4f0589;
+  --danger: #de4242;
+  --title: #4f0589;
+  --icon: #513368;
+}
+
+h1.title {
+  color: var(--title);
+}
+
+.btn.btn-action {
+  font-weight: 400;
+  background-color: var(--primary-button);
+  color: var(--white-gray);
+}
+.btn.btn-action:hover {
+  font-weight: 500;
+  background-color: var(--white-gray);
+  color: var(--primary-button);
+}
+.page-link.paginate {
+  color: var(--primary-button);
+}
+
+.page-item.active .page-link {
+  background-color: var(--primary-button);
+  color: var(--white-gray);
+}
+
+.page-link.paginate:hover {
+  background-color: var(--primary-button);
+  color: var(--white-gray);
+}
+
+.page-item.li-disabled .page-link {
+  color: var(--white-gray);
+  cursor: not-allowed;
+}
+
+.page-item.li-disabled .page-link:hover {
+  background-color: transparent;
+}
+
+.fa{
+  color: var(--icon);
+  cursor: pointer;
+}
+
+thead.thead-dark th {
+  background-color: var(--icon);
+  color: white;
+  font-weight: bold;
+}
+tr.tr-color td {
+  background-color: var(--second-gray);
+}

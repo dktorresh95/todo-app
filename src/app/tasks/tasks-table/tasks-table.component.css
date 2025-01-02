@@ -1,4 +1,43 @@
 .li-disabled {
-    pointer-events:none;
-    opacity:0.6;
+  pointer-events: none;
+  opacity: 0.6;
 }
+#edit-icon, #delete-icon {
+  position: relative;
+}
+
+#edit-icon:hover::after {
+  content: "Editar tarea";
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 8px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+#edit-icon:hover::after, #delete-icon:hover::after {
+  opacity: 1;
+}
+#delete-icon:hover::after {
+  content: "Eliminar tarea";
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 8px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+

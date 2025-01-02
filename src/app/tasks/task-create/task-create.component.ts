@@ -65,7 +65,7 @@ export class TaskCreateComponent implements OnInit {
       icon: "success"
     }).then( (res) => {
       if (res.isConfirmed) {
-        this.router.navigate(['']);
+        this.return();
       }
     })
   }
@@ -88,5 +88,8 @@ export class TaskCreateComponent implements OnInit {
       description: [this.isEdit ? response?.title :  '', [Validators.required, Validators.minLength(5), Validators.maxLength(50)]]
     });
     this.taskForm.get('id')?.disable();
+  }
+  return() {
+    this.router.navigate(['']);
   }
 }

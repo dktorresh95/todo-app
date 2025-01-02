@@ -1,17 +1,17 @@
 <div class="container mt-4">
     <form [formGroup]="taskForm">
-        <h2>
+        <h1 class="title">
             <span *ngIf="isEdit">Editar</span>
             <span *ngIf="!isEdit">Crear</span>
-            una tarea</h2>
-            <div class="row col-lg-12 mx-auto" *ngIf="isEdit">
-                <div class="col-5 form-group">
+            una tarea</h1>
+            <div class="row col-lg-12 mx-auto mt-5" *ngIf="isEdit">
+                <div class="col-12 col-md-5 m-2 form-group">
                     <label class="label">Id</label>
                     <div class="input-group">
                       <input type="text" class="form-control" formControlName="id">
                     </div>
                 </div>
-                <div class="col-5 form-group">
+                <div class="col-12 col-md-5 m-2 form-group">
                     <label class="label">Estado</label>
                     <div class="input-group">
                         <select class="form-control custom-select" formControlName="completed">
@@ -21,8 +21,8 @@
                     </div>
                 </div>
             </div>
-        <div class="row col-lg-12 mx-auto">
-            <div class="col-5 form-group">
+        <div class="row col-lg-12 mx-auto" [ngClass]="{'mt-5': !isEdit}">
+            <div class="col-12 col-md-5 m-2 form-group">
                 <label class="label">Título</label>
                 <div class="input-group">
                   <input type="text" class="form-control" formControlName="title" placeholder="titulo">
@@ -30,7 +30,7 @@
                 <div class="text-danger" *ngIf="taskForm.get('title')?.hasError('required') && taskForm.get('title')?.touched">Este campo es requerido</div>
                 <div [ngClass]="{ 'text-danger' : taskForm.get('title')?.hasError('minlength')}">Mínimo 5 caracteres y máximo 30</div>
             </div>
-            <div class="col-5 form-group">
+            <div class="col-12 col-md-5 m-2 form-group">
                 <label class="label">Descripción</label>
                 <div class="input-group">
                   <input type="text" class="form-control" formControlName="description" placeholder="descripción">
@@ -40,11 +40,11 @@
             </div>
         </div>
         <div class="row col-12 justify-content-center m-4">
-            <div class="col-5">
-                <button class="btn btn-secondary ">Cancelar</button>
+            <div class="col-4 col-md-5 m-2" >
+                <button class="btn btn-secondary " (click)="return()">Cancelar</button>
             </div>
-            <div class="col-5">
-                <button class="btn btn-primary" (click)="isEdit? editTask() : createTask()">
+            <div class="col-4 col-md-5 m-2">
+                <button class="btn btn-action" (click)="isEdit? editTask() : createTask()">
                     <span *ngIf="isEdit">Editar</span>
                     <span *ngIf="!isEdit">Crear</span>
                 </button>
