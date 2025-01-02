@@ -3,4 +3,5 @@ export class Task {
     title?: string;
     description?: string;
     userId?: string;
+    completed?: boolean;
 }

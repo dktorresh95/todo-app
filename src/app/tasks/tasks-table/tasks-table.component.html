@@ -3,6 +3,7 @@
     <tr>
       <th scope="col">Id</th>
       <th scope="col">Tarea</th>
+      <th scope="col">Estado</th>
       <th scope="col">Acciones</th>
     </tr>
   </thead>
@@ -10,9 +11,10 @@
     <tr *ngFor="let task of paginatedTasks">
       <td>{{ task.id }}</td>
       <td>{{ task.title }}</td>
+      <td>{{ task.completed ? 'Completado' : 'Pendiente' }}</td>
       <td>
         <i class="fa fa-trash mx-3"></i>
-        <i class="fa fa-edit"></i>
+        <i class="fa fa-edit" (click)="edit(task?.id || '')"></i>
       </td>
     </tr>
   </tbody>

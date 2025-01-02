@@ -1,6 +1,26 @@
 <div class="container mt-4">
     <form [formGroup]="taskForm">
-        <h2>Crear una tarea</h2>
+        <h2>
+            <span *ngIf="isEdit">Editar</span>
+            <span *ngIf="!isEdit">Crear</span>
+            una tarea</h2>
+            <div class="row col-lg-12 mx-auto" *ngIf="isEdit">
+                <div class="col-5 form-group">
+                    <label class="label">Id</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" formControlName="id">
+                    </div>
+                </div>
+                <div class="col-5 form-group">
+                    <label class="label">Estado</label>
+                    <div class="input-group">
+                        <select class="form-control custom-select" formControlName="completed">
+                            <option [value]="true">Completado</option>
+                            <option [value]="false">Pendiente</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
         <div class="row col-lg-12 mx-auto">
             <div class="col-5 form-group">
                 <label class="label">Título</label>
@@ -24,7 +44,10 @@
                 <button class="btn btn-secondary ">Cancelar</button>
             </div>
             <div class="col-5">
-                <button class="btn btn-primary" (click)="createTask()">Crear</button>
+                <button class="btn btn-primary" (click)="isEdit? editTask() : createTask()">
+                    <span *ngIf="isEdit">Editar</span>
+                    <span *ngIf="!isEdit">Crear</span>
+                </button>
             </div>
         </div>
     </form>

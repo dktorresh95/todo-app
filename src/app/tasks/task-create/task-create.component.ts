@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Task } from 'src/app/models/task.model';
 import { TaskService } from 'src/app/services/task.service';
 import Swal from 'sweetalert2';
@@ -13,22 +13,28 @@ import Swal from 'sweetalert2';
 export class TaskCreateComponent implements OnInit {
 
   taskForm: FormGroup = new FormGroup ({});
+  task: Task = {};
+  isEdit: boolean = false;
   constructor(private formBuilder: FormBuilder,
     private taskService: TaskService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
 ) { }
   ngOnInit() {
-    this.taskForm = this.formBuilder.group({
-      title: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(30)]],
-      description: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(50)]]
-    })
+    this.route.paramMap.subscribe(params => {
+      this.isEdit = params.get('id') ? true: false;
+      if (this.isEdit) {
+        this.getTaskById(params?.get('id')?.toString() || '')
+      }
+    });
+    this.buildForm()
   }
 
   createTask() {
     if (this.taskForm.valid) {
       this.taskService.addTasks(this.taskForm.value).subscribe( {
         next: (res: Task) => {
-          this.showModalInfo(res, 'Información')
+          this.showModalInfo(res, 'Información', 'creó')
         },
         error: err => {
           
@@ -38,12 +44,49 @@ export class TaskCreateComponent implements OnInit {
       this.taskForm.markAllAsTouched();
     }
   }
-
-  showModalInfo(text: Task, title: string) {
+  editTask() {
+    if (this.taskForm.valid) {
+      this.taskService.updateTasks(this.taskForm.value, this.taskForm.get('id')?.value || '').subscribe( {
+        next: (res: Task) => {
+          this.showModalInfo(res, 'Información', 'editó')
+        },
+        error: err => {
+          
+        }
+      })
+    } else {
+      this.taskForm.markAllAsTouched();
+    }
+  }
+  showModalInfo(text: Task, title: string, action: string) {
     Swal.fire({
       title,
-      text: 'Se creó el registro con id ' + text.id,
+      text: `Se ${action} el registro con id ` + text.id,
       icon: "success"
+    }).then( (res) => {
+      if (res.isConfirmed) {
+        this.router.navigate(['']);
+      }
+    })
+  }
+
+  getTaskById(id: string) {
+    this.taskService.getTaskById(id).subscribe( {
+      next: (res: Task) => {
+        this.buildForm(res);
+      },
+      error: err => {
+        
+      }
+    })  
+  }
+  buildForm (response?: Task) {
+    this.taskForm = this.formBuilder.group({
+      id: this.isEdit ? response?.id : '',
+      completed: this.isEdit ? response?.completed : false,
+      title: [this.isEdit ? response?.title : '', [Validators.required, Validators.minLength(5), Validators.maxLength(30)]],
+      description: [this.isEdit ? response?.title :  '', [Validators.required, Validators.minLength(5), Validators.maxLength(50)]]
     });
+    this.taskForm.get('id')?.disable();
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Task } from 'src/app/models/task.model';
 import { TaskService } from 'src/app/services/task.service';
 
@@ -16,7 +17,9 @@ export class TasksTableComponent implements OnInit {
   totalPages: number = 0;
   pageRange: number[] = [];
 
-  constructor(private taskService: TaskService) {}
+  constructor(private taskService: TaskService,
+              private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.loadTasks();
@@ -30,6 +33,10 @@ export class TasksTableComponent implements OnInit {
       this.updatePaginatedTasks();
       this.updatePageRange();
     });
+  }
+
+  edit(id: string) {
+    this.router.navigate([`tasks/edit` , id])
   }
 
   updatePaginatedTasks() {

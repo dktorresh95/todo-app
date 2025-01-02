@@ -13,8 +13,14 @@ export class TaskService {
   getTasks() {
     return this.httpClient.get<Task[]>(this.urlApi);
   }
-
+  getTaskById(id: string) {
+    return this.httpClient.get<Task>(this.urlApi + `/${id}`);
+  }
   addTasks(body: Task) {
     return this.httpClient.post(this.urlApi, body);
+  }
+
+  updateTasks(body: Task, id: string) {
+    return this.httpClient.patch(this.urlApi+ `/${id}`, body);
   }
 }

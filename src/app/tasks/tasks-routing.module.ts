@@ -6,6 +6,7 @@ import { TaskCreateComponent } from './task-create/task-create.component';
 const routes: Routes = [
     {path: '', component: MainPageComponent},
     {path: 'create', component: TaskCreateComponent},
+    {path: 'edit/:id', component: TaskCreateComponent},
 
 ];
 
