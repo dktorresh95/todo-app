@@ -11,7 +11,7 @@
     <tr *ngFor="let task of paginatedTasks; let i =index" [ngClass]="{'tr-color': i % 2 === 1}">
       <td>{{ task.id }}</td>
       <td>{{ task.title }}</td>
-      <td>{{ task.completed ? 'Completado' : 'Pendiente' }}</td>
+      <td  [ngClass]="{'completed': task.completed, 'pending': !task.completed}">{{ task.completed ? 'Completado' : 'Pendiente' }}</td>
       <td>
         <i id="delete-icon" class="fa fa-trash mx-3" (click)="showModalConfirm(task?.id || '')"></i>
         <i id="edit-icon" class="fa fa-edit" (click)="edit(task?.id || '')"></i>
