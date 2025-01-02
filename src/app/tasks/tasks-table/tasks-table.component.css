@@ -5,7 +5,9 @@
 #edit-icon, #delete-icon {
   position: relative;
 }
-
+.pagination{
+  justify-content: flex-end;
+}
 #edit-icon:hover::after {
   content: "Editar tarea";
   position: absolute;

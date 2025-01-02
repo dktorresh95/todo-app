@@ -28,7 +28,7 @@
                   <input type="text" class="form-control" formControlName="title" placeholder="titulo">
                 </div>
                 <div class="text-danger" *ngIf="taskForm.get('title')?.hasError('required') && taskForm.get('title')?.touched">Este campo es requerido</div>
-                <div [ngClass]="{ 'text-danger' : taskForm.get('title')?.hasError('minlength')}">Mínimo 5 caracteres y máximo 30</div>
+                <div [ngClass]="{ 'text-danger' : taskForm.get('title')?.hasError('minlength') || taskForm.get('title')?.hasError('maxlength') }">Mínimo 5 caracteres y máximo 30</div>
             </div>
             <div class="col-12 col-md-5 m-2 form-group">
                 <label class="label">Descripción</label>
@@ -36,7 +36,7 @@
                   <input type="text" class="form-control" formControlName="description" placeholder="descripción">
                 </div>
                 <div class="text-danger" *ngIf="taskForm.get('description')?.hasError('required') && taskForm.get('description')?.touched">Este campo es requerido</div>
-                <div [ngClass]="{ 'text-danger' : taskForm.get('description')?.hasError('minlength')}">Mínimo 5 caracteres y máximo 30</div>
+                <div [ngClass]="{ 'text-danger' : taskForm.get('description')?.hasError('minlength') || taskForm.get('description')?.hasError('maxlength')}">Mínimo 5 caracteres y máximo 30</div>
             </div>
         </div>
         <div class="row col-12 justify-content-center m-4">
