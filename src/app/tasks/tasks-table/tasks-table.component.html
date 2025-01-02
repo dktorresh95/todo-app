@@ -1,15 +1,41 @@
 <table class="table">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">Tarea</th>
-        <th scope="col">Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Tarea</th>
+      <th scope="col">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let task of paginatedTasks">
+      <td>{{ task.id }}</td>
+      <td>{{ task.title }}</td>
+      <td>
+        <i class="fa fa-trash mx-3"></i>
+        <i class="fa fa-edit"></i>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item" [ngClass]="{'li-disabled' :currentPage === 1}">
+      <a class="page-link" href="#" aria-label="Previous" (click)="previousPage()">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+
+    <li *ngFor="let page of pageRange" class="page-item" [class.active]="currentPage === page">
+      <a class="page-link" href="#" (click)="goToPage(page)">
+        {{ page }}
+      </a>
+    </li>
+
+    <li class="page-item" [ngClass]="{'li-disabled' :currentPage === totalPages}">
+      <a class="page-link" href="#" aria-label="Next" (click)="nextPage()">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>

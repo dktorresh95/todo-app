@@ -11,7 +11,7 @@ export class TaskService {
   constructor(private httpClient: HttpClient) { }
 
   getTasks() {
-    return this.httpClient.get(this.urlApi);
+    return this.httpClient.get<Task[]>(this.urlApi);
   }
 
   addTasks(body: Task) {
